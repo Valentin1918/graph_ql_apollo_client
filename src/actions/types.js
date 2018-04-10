@@ -1,0 +1,1 @@
+export const UPDATE_ERSD_STATE = 'UPDATE_ERSD_STATE';
