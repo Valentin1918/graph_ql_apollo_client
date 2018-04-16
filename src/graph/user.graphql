@@ -1,0 +1,9 @@
+query User($id: ID!, $alcoholic: Boolean!) {
+  users(id: $id){
+    id
+    name
+    friends(alcoholic: $alcoholic) {
+      name
+    }
+  }
+}
