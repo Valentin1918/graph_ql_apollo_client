@@ -11,7 +11,7 @@
     "start": "cross-env PATH=\"../node_modules/.bin:$PATH\" webpack-dev-server --port 4002 --content-base ./build",
     "prepublish": "npm run lint && npm run compile",
     "lint": "cross-env PATH=\"../node_modules/.bin:$PATH\" eslint ./src && echo \"eslint: ok!\"",
-    "download-schema": "rm -rf graphql.schema.json; apollo-codegen download-schema http://localhost:4000/graphql --output graphql.schema.json"
+    "download-schema": "rm -rf graphql.schema.json; apollo-codegen introspect-schema http://localhost:4000/graphql --output graphql.schema.json"
   },
   "repository": {
     "type": "git",
@@ -26,7 +26,6 @@
   "dependencies": {
     "apollo-cache-inmemory": "^1.1.12",
     "apollo-client": "^2.2.8",
-    "apollo-codegen": "^0.19.1",
     "apollo-link-http": "^1.5.3",
     "graphql": "^0.13.2",
     "graphql-tag": "^2.8.0",
@@ -36,6 +35,7 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
+    "apollo-codegen": "^0.19.1",
     "babel-plugin-istanbul": "4.1.5",
     "core-components": "^1.0.270",
     "cross-env": "^5.1.4",
