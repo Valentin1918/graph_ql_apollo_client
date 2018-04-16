@@ -2,31 +2,27 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { compose, graphql } from 'react-apollo';
-import gql from 'graphql-tag';
+// import gql from 'graphql-tag';
 import UserQuery from '../graph/user.graphql';
 import AC from '../actions';
 import { ERSD } from '../reducers';
 
-
-
 //Another way to write a query:
-const UserQuery1 = gql`
-    query User($id: ID!, $alcoholic: Boolean!) {
-        users(id: $id){
-            id
-            name
-            friends(alcoholic: $alcoholic) {
-                name
-            }
-        }
-    }
-`;
+// const UserQuery1 = gql`
+//     query User($id: ID!, $alcoholic: Boolean!) {
+//         users(id: $id){
+//             id
+//             name
+//             friends(alcoholic: $alcoholic) {
+//                 name
+//             }
+//         }
+//     }
+// `;
 
 const mapResultsToProps = ({ data }) => {
   if (!data.users) return { loading: true };
-
   const { id, name, friends } = data.users;
-
   return {
     loading: false,
     id,
@@ -35,12 +31,9 @@ const mapResultsToProps = ({ data }) => {
   };
 };
 
-const mapPropsToOptions = ({ id, alcoholic }) => {
+const mapPropsToOptions = ({ ersd }) => {
   return {
-    variables: {
-      "id": 124,
-      "alcoholic": false
-    }
+    variables: ersd.queryVariables
   };
 };
 
@@ -53,7 +46,7 @@ const mapPropsToOptions = ({ id, alcoholic }) => {
       getAllData: AC.getAllData,
     }
   ),
-  graphql(UserQuery1, {
+  graphql(UserQuery, {
     props: mapResultsToProps,
     options: mapPropsToOptions,
   })
@@ -66,8 +59,7 @@ export default class Authentication extends Component {
 
 
   render() {
-    const { ersd, loading, ...matchSummaryProps } = this.props;
-    console.log('render', ersd, loading, matchSummaryProps);
+    console.log('render this.props', this.props);
     return (
       <div className="doc-collab-workflow-settings doc-collab-workflow-settings--ersd">
 
